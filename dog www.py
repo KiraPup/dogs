@@ -38,6 +38,9 @@ def get_doc_image():#будем по ссылке обращаться к сай
         #респонс это штука на которую прилетает ссылка на картинку
         response.raise_for_status() #если статус не 200 , а другое , то не найден
         data = response.json() #получить изображение
+        print(data)
+        print(data['status'])
+        print(data['message'])
         return data['message']
     except Exception as e:
         mb.showerror("Ошибка","Возникла ошибка при загрузке API {e}")
@@ -70,10 +73,13 @@ width_lebel = ttk.Label(text= 'Ширина:')
 width_lebel.pack(side='left', padx=(10, 0))#лефт к левой стороне прижата, падх обозначает , что слева будет отступ 10 пикселей, а справа 0 отступ
 width_spinbox = ttk.Spinbox(from_=200, to=500, increment=50, width=5)
 width_spinbox.pack(side='left', padx=(0, 10))
+width_spinbox.set(300)#устанавливаем по умолчанию
+
 height_label = ttk.Label(text='Высота: ')
 height_label.pack(side='left', padx=(10, 0))
 height_spinbox = ttk.Spinbox(from_=200, to=500, increment=50, width=5)
 height_spinbox.pack(side='left', padx=(0, 10))
+height_spinbox.set(300) #стоит по умолчанию
 
 #добавляем виджет Notepad
 #теперь будет не много новвых окон, а одно , но с закладкамии
