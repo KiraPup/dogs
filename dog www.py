@@ -14,10 +14,25 @@ def show_image():
             img_data = BytesIO(response.content)
             img = Image.open(img_data)
             img.thumbnail((300,300))
+            img = ImageTk.PhotoImage[img]
             label.config(image=img)#загружаем в метку изображение
             label.image = img #чтобы компьютер в мусор не выкинул
         except Exception as e:
             mb.showerror('Ошибка',"Возникла ошибка {e}")
+
+
+
+def get_doc_image():#будем по ссылке обращаться к сайту док сео
+    try:
+        response = requests.get('https://dog.ceo/api/betweeds/image/random')#этот респонс получит из интернета
+        #респонс это штука на которую прилетает ссылка на картинку
+        response.raise_for_status() #если статус не 200 , а другое , то не найден
+        data = response.json() #получить изображение
+        return data('message')
+    except Exception as e:
+        mb.showerror("Ошибка","Возникла ошибка при загрузке API {e}")
+        return None #возвращаем пустоту после ошибки
+
 
 
 
